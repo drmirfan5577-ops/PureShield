@@ -1,0 +1,160 @@
+import type { FilterItem, IntegrationPlatform, LauncherConfig, ActivityItem } from "@/types";
+
+export const ADMIN_PASSWORD = "1122";
+
+export const TRANSLATIONS = {
+  en: {
+    appName: "PureShield",
+    tagline: "Broad-spectrum • Beyond limits",
+    dashboard: "Dashboard",
+    activity: "Activity",
+    filters: "Filters",
+    settings: "Settings",
+    integration: "Integration",
+    admin: "Admin Panel",
+    shieldActive: "Shield is ACTIVE",
+    shieldPaused: "Shield is PAUSED",
+    adsBlocked: "Ads Blocked",
+    trackersKilled: "Trackers Killed",
+    dataSaved: "Data Saved",
+    timeSaved: "Time Saved",
+    protectionEngine: "Protection Engine",
+    liveActivity: "Live Activity",
+    broadSpectrumFilters: "Broad-spectrum Filters",
+    performanceIndex: "Performance Index",
+    liveProtection: "LIVE PROTECTION",
+  },
+  ur: {
+    appName: "پیور شیلڈ",
+    tagline: "وسیع تحفظ • حدود سے پرے",
+    dashboard: "ڈیش بورڈ",
+    activity: "سرگرمی",
+    filters: "فلٹرز",
+    settings: "ترتیبات",
+    integration: "انضمام",
+    admin: "ایڈمن پینل",
+    shieldActive: "شیلڈ فعال ہے",
+    shieldPaused: "شیلڈ رکی ہوئی ہے",
+    adsBlocked: "اشتہارات بلاک",
+    trackersKilled: "ٹریکرز ختم",
+    dataSaved: "ڈیٹا محفوظ",
+    timeSaved: "وقت بچا",
+    protectionEngine: "تحفظ انجن",
+    liveActivity: "براہ راست سرگرمی",
+    broadSpectrumFilters: "وسیع فلٹرز",
+    performanceIndex: "کارکردگی انڈیکس",
+    liveProtection: "براہ راست تحفظ",
+  },
+  ar: {
+    appName: "بيور شيلد",
+    tagline: "حماية شاملة • بلا حدود",
+    dashboard: "لوحة التحكم",
+    activity: "النشاط",
+    filters: "الفلاتر",
+    settings: "الإعدادات",
+    integration: "التكامل",
+    admin: "لوحة الإدارة",
+    shieldActive: "الحماية نشطة",
+    shieldPaused: "الحماية متوقفة",
+    adsBlocked: "الإعلانات المحجوبة",
+    trackersKilled: "المتتبعون المُزالون",
+    dataSaved: "البيانات المحفوظة",
+    timeSaved: "الوقت الموفر",
+    protectionEngine: "محرك الحماية",
+    liveActivity: "النشاط المباشر",
+    broadSpectrumFilters: "الفلاتر الشاملة",
+    performanceIndex: "مؤشر الأداء",
+    liveProtection: "حماية مباشرة",
+  },
+};
+
+export const DEFAULT_FILTERS: FilterItem[] = [
+  { key: "ads", label: "Ads", description: "Banner, video, pop-up, interstitial ads", enabled: true, category: "ads", color: "#3B6EFF" },
+  { key: "trackers", label: "Trackers", description: "Analytics, fingerprinting & behavioral tracking", enabled: true, category: "privacy", color: "#9B5CFF" },
+  { key: "malware", label: "Malware", description: "Malicious scripts, domains & drive-by attacks", enabled: true, category: "security", color: "#E0152A" },
+  { key: "phishing", label: "Phishing", description: "Deceptive sites & credential harvesting", enabled: true, category: "security", color: "#FF4F8B" },
+  { key: "cryptominers", label: "Cryptominers", description: "Browser-based crypto mining scripts", enabled: true, category: "security", color: "#F59E0B" },
+  { key: "social", label: "Social Widgets", description: "Embedded social buttons & share plugins", enabled: false, category: "social", color: "#00B87A" },
+  { key: "cookie", label: "Cookie Banners", description: "Auto-dismiss GDPR consent popups", enabled: true, category: "privacy", color: "#00D4BE" },
+  { key: "sponsored", label: "Sponsored Posts", description: "Native & feed-based ad injection", enabled: true, category: "ads", color: "#3B6EFF" },
+  { key: "popups", label: "Pop-up Windows", description: "Unwanted pop-up & redirect windows", enabled: true, category: "ads", color: "#9B5CFF" },
+  { key: "telemetry", label: "Telemetry", description: "Software telemetry & OS tracking requests", enabled: false, category: "privacy", color: "#6366F1" },
+];
+
+export const INTEGRATION_PLATFORMS: IntegrationPlatform[] = [
+  // Hosting & Deploy
+  { id: "namecheap", name: "Namecheap", category: "Domain & Hosting", icon: "🌐", color: "#DE3723", url: "https://namecheap.com", description: "Domain registration & hosting", connected: false, gradient: "from-red-50 to-orange-50" },
+  { id: "netlify", name: "Netlify", category: "Deploy & CI/CD", icon: "⬛", color: "#00C7B7", url: "https://netlify.com", description: "Deploy & continuous delivery", connected: true, gradient: "from-teal-50 to-cyan-50" },
+  { id: "github", name: "GitHub", category: "Version Control", icon: "🐙", color: "#181717", url: "https://github.com", description: "Source control & collaboration", connected: true, gradient: "from-gray-50 to-slate-50" },
+  { id: "vercel", name: "Vercel", category: "Deploy & CI/CD", icon: "▲", color: "#000000", url: "https://vercel.com", description: "Instant global deployment", connected: false, gradient: "from-gray-50 to-zinc-50" },
+  { id: "cloudflare", name: "Cloudflare", category: "CDN & Security", icon: "🔶", color: "#F6821F", url: "https://cloudflare.com", description: "CDN, DNS & DDoS protection", connected: false, gradient: "from-orange-50 to-yellow-50" },
+  { id: "github-pages", name: "GitHub Pages", category: "Static Hosting", icon: "📄", color: "#181717", url: "https://pages.github.com", description: "Free static site hosting", connected: false, gradient: "from-slate-50 to-gray-50" },
+  // Backend & DB
+  { id: "supabase", name: "Supabase", category: "Backend as a Service", icon: "⚡", color: "#3ECF8E", url: "https://supabase.com", description: "Open source Firebase alternative", connected: false, gradient: "from-emerald-50 to-green-50" },
+  { id: "onspace", name: "OnSpace", category: "AI Platform", icon: "🚀", color: "#5C6BC0", url: "https://onspace.ai", description: "AI-powered app development", connected: true, gradient: "from-indigo-50 to-purple-50" },
+  // Communication
+  { id: "zoho-mail", name: "Zoho Mail", category: "Email Service", icon: "📧", color: "#E6232E", url: "https://zoho.com/mail", description: "Business email hosting", connected: false, gradient: "from-red-50 to-pink-50" },
+  // Dev tools
+  { id: "expo", name: "Expo Go", category: "Mobile Dev", icon: "📱", color: "#000020", url: "https://expo.dev", description: "React Native development", connected: false, gradient: "from-blue-50 to-indigo-50" },
+  // AI Assistants
+  { id: "claude", name: "Claude", category: "AI Assistant", icon: "🤖", color: "#CC785C", url: "https://claude.ai", description: "Anthropic AI assistant", connected: false, gradient: "from-orange-50 to-amber-50" },
+  { id: "qwen", name: "Qwen", category: "AI Assistant", icon: "🔮", color: "#7B2FBE", url: "https://qwen.ai", description: "Alibaba AI language model", connected: false, gradient: "from-purple-50 to-violet-50" },
+  { id: "gemini", name: "Gemini", category: "AI Assistant", icon: "✨", color: "#4285F4", url: "https://gemini.google.com", description: "Google AI multimodal model", connected: false, gradient: "from-blue-50 to-sky-50" },
+  { id: "chatgpt", name: "ChatGPT", category: "AI Assistant", icon: "💬", color: "#10A37F", url: "https://chat.openai.com", description: "OpenAI conversational AI", connected: false, gradient: "from-teal-50 to-emerald-50" },
+  { id: "genspark", name: "GenSpark", category: "AI Search", icon: "⚡", color: "#FF6B35", url: "https://genspark.ai", description: "AI-powered search & research", connected: false, gradient: "from-orange-50 to-red-50" },
+  { id: "manus", name: "Manus", category: "AI Agent", icon: "🦾", color: "#5B73F0", url: "https://manus.im", description: "Autonomous AI agent platform", connected: false, gradient: "from-indigo-50 to-blue-50" },
+];
+
+export const LAUNCHERS: LauncherConfig[] = [
+  {
+    id: "crystal",
+    name: "Crystal Clear",
+    description: "Ultra-clean milky white with blue-violet glass layers",
+    primaryGradient: ["#FAFBFF", "#F0F3FF"],
+    accentColor: "#3B6EFF",
+    cardStyle: "glass",
+  },
+  {
+    id: "neon",
+    name: "Neon Pulse",
+    description: "Electric blue & violet glow with scan-line effects",
+    primaryGradient: ["#F5F0FF", "#EEF2FF"],
+    accentColor: "#9B5CFF",
+    cardStyle: "glass-violet",
+  },
+  {
+    id: "emerald",
+    name: "Emerald Shield",
+    description: "Lush emerald glass tones with mint highlights",
+    primaryGradient: ["#F0FFF9", "#E8FFF5"],
+    accentColor: "#00B87A",
+    cardStyle: "glass-emerald",
+  },
+  {
+    id: "crimson",
+    name: "Crimson Guard",
+    description: "Bold crimson & rose glass with high-alert energy",
+    primaryGradient: ["#FFF5F6", "#FFF0F2"],
+    accentColor: "#E0152A",
+    cardStyle: "glass-crimson",
+  },
+  {
+    id: "aurora",
+    name: "Aurora Drift",
+    description: "Shifting aurora gradients — blue, mint, violet, gold",
+    primaryGradient: ["#F5FAFF", "#F0F5FF"],
+    accentColor: "#00D4BE",
+    cardStyle: "glass-aurora",
+  },
+];
+
+export const INITIAL_ACTIVITY: ActivityItem[] = [
+  { id: "a1", type: "Ad", site: "news-daily.com", count: 24, timestamp: new Date(Date.now() - 2000), severity: "low" },
+  { id: "a2", type: "Tracker", site: "analytics-x.net", count: 8, timestamp: new Date(Date.now() - 8000), severity: "medium" },
+  { id: "a3", type: "Malware", site: "suspicious-ads.io", count: 1, timestamp: new Date(Date.now() - 22000), severity: "high" },
+  { id: "a4", type: "Ad", site: "video-stream.tv", count: 12, timestamp: new Date(Date.now() - 45000), severity: "low" },
+  { id: "a5", type: "Tracker", site: "fingerprint.js", count: 3, timestamp: new Date(Date.now() - 65000), severity: "medium" },
+  { id: "a6", type: "Ad", site: "shopping-hub.com", count: 47, timestamp: new Date(Date.now() - 122000), severity: "low" },
+  { id: "a7", type: "Phishing", site: "secure-login-fake.xyz", count: 1, timestamp: new Date(Date.now() - 200000), severity: "high" },
+  { id: "a8", type: "Cryptominer", site: "miner.js.cdn.net", count: 2, timestamp: new Date(Date.now() - 380000), severity: "high" },
+];
